@@ -2,15 +2,17 @@ const express= require('express')
 const app= express()
 const cors = require('cors')
 const server= require('http').createServer(app)
+const port= 5000
 const { threeos, moves, tempBoard1, setupBoard } = require('./data')
-const router = require('./router');
 
-const app = express();
-const server = http.createServer(app);
-const io = socketio(server);
+app.get('/', (req,res)=>{
+  res.send('<h1>Server is up and running</h1>')
+})
 
-app.use(cors());
-app.use(router);
+  
+app.use(cors())
+
+const io = require('socket.io')(server, {cors:{origin:"*"}})
 
   let initialGame={ 
     masterBoard: tempBoard1,
