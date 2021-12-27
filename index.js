@@ -2,17 +2,15 @@ const express= require('express')
 const app= express()
 const cors = require('cors')
 const server= require('http').createServer(app)
-const port= process.env.port||5000
 const { threeos, moves, tempBoard1, setupBoard } = require('./data')
+const router = require('./router');
 
-app.get('/', (req,res)=>{
-  res.send('<h1>Server is up and running</h1>')
-})
+const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
 
-  
-app.use(cors())
-
-const io = require('socket.io')(server, {cors:{origin:"*"}})
+app.use(cors());
+app.use(router);
 
   let initialGame={ 
     masterBoard: tempBoard1,
@@ -713,7 +711,4 @@ socket.on('disconnect',()=>{
  }) 
 
 
- server.listen(port,()=>{
- console.log("server is running ....");
-})
-
+server.listen(process.env.PORT || 5000, () => console.log(`Server has started.`));
