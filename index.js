@@ -2,7 +2,7 @@ const express= require('express')
 const app= express()
 const cors = require('cors')
 const server= require('http').createServer(app)
-const port= 5000
+require('dotenv').config()
 const { threeos, moves, tempBoard1, setupBoard } = require('./data')
 
 app.get('/', (req,res)=>{
